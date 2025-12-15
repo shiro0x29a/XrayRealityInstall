@@ -156,7 +156,7 @@ function xray_new_config() {
     LOG INFO "using fingerprint: ${fingerprint}"
 
     random_string=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 4; echo '')
-    name="$security-$random_string"
+    name="client-$random_string"
     LOG INFO "setting name of the profile: ${name}"
 
     LOG DEBUG "using template config file: ${TEMPL_CONFIG}"
@@ -348,9 +348,11 @@ get_vless_profile() {
     # local public_key=$(echo "$private_key" | base64 -d | openssl ec -pubout -outform der 2>/dev/null | tail -c 65 | base64 -w 0 | tr '/+' '_-' | tr -d '=' 2>/dev/null)
     local public_key=$(jq -r '.inbounds[0].streamSettings.realitySettings.publicKey?' "$CONFIG")
     
+    local public_key=$(jq -r '.inbounds[0].streamSettings.realitySettings.publicKey?' "$CONFIG")
+
     server_ip=$(curl -s https://2ip.io | awk '{print $1}')
     
-    local vless_url="vless://${uuid}@${server_ip}:${server_port}?encryption=none&flow=xtls-rprx-vision&security=reality&sni=${server_name}&fp=chrome&pbk=${public_key}&sid=${selected_short_id}&type=tcp&headerType=none#Xray-Reality"
+    local vless_url="vless://${uuid}@${server_ip}:${server_port}?encryption=none&flow=xtls-rprx-vision&security=reality&sni=${server_name}&fp=chrome&pbk=${public_key}&sid=${selected_short_id}&type=tcp&headerType=none#client-$selected_short_id"
     
     echo ""
     echo "=== VLESS URL ==="

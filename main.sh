@@ -436,7 +436,7 @@ get_vless_profile() {
 
     server_ip=$(curl -s https://2ip.io | awk '{print $1}')
     
-    local vless_url="vless://${uuid}@${server_ip}:${server_port}?encryption=none&flow=$flow-vision&security=reality&sni=${server_name}&fp=chrome&pbk=${public_key}&sid=${selected_short_id}&type=$type&headerType=none#client-$selected_short_id"
+    local vless_url="vless://${uuid}@${server_ip}:${server_port}?encryption=none&flow=$flow&security=reality&sni=${server_name}&fp=chrome&pbk=${public_key}&sid=${selected_short_id}&type=$type&headerType=none#client-$selected_short_id"
     
     echo ""
     echo "=== VLESS URL ==="

@@ -223,13 +223,13 @@ function xray_new_config() {
     cmfgsite="$CMFG_SITE"
     LOG INFO "using camouflag website: ${cmfgsite}"
 
-    flow=$(jq -r '.inbounds[0].settings.clients.flow?' "$CONFIG")
+    flow=$(jq -r '.inbounds[0].settings.clients.flow?' "$TEMPL_CONFIG")
     LOG INFO "using flow: ${flow}"
 
     inbound_port="$INBOUND_PORT"
     LOG INFO "setting inbound listen port: ${inbound_port}"
 
-    protocol_type=$(jq -r '.inbounds[0].streamSettings.network?' "$CONFIG")
+    protocol_type=$(jq -r '.inbounds[0].streamSettings.network?' "$TEMPL_CONFIG")
     LOG INFO "using ${protocol_type}"
 
     security="reality"

@@ -434,6 +434,7 @@ get_vless_profile() {
     local flow=$(jq -r '.inbounds[0].settings.clients.flow?' "$CONFIG")
     local type=$(jq -r '.inbounds[0].streamSettings.network?' "$CONFIG")
 
+
     server_ip=$(curl -s https://2ip.io | awk '{print $1}')
     
     local vless_url="vless://${uuid}@${server_ip}:${server_port}?encryption=none&flow=$flow&security=reality&sni=${server_name}&fp=chrome&pbk=${public_key}&sid=${selected_short_id}&type=$type&headerType=none#client-$selected_short_id"
